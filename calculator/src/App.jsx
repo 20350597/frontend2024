@@ -9,8 +9,26 @@ function App() {
  const [display, setDisplay] = useState({
   value: '0',
   hasPoint: false,
+  operator: '',
+  previousValue: '0',
 
  })
+
+ const deleteLastCharacter = () => {
+  setDisplay({
+    ...display,
+    value: display.value.slice(0, -1),
+    hasPoint: (display.value.slice(-1) === '.') ? false : display.hasPoint
+  })
+  if (display.value.length === 1) {
+    setDisplay({
+      ...display,
+      value: '0',
+    })
+  } 
+ } 
+ 
+
 
  const updateDisplay = (value) => {
 
@@ -46,6 +64,45 @@ function App() {
   })
  }
 
+ const setOperator = (operator) => {
+  setDisplay({
+    ...display,
+    operator,
+    previousValue: display.value,
+    value: '0',
+    haspoint: false,
+
+  })
+}
+
+  const calculate = () => {
+    if (display.operator === '') {
+      return
+    }
+
+    /*let result = 0
+
+    if(display.operator === '%'){
+      result = eval(display.previousValue + ' / 100 *' + display.value)
+    } else{
+      result = eval(display.previousValue + display.operator + display.value)
+    }*/
+
+    let result = (display.operator === '%') ? 
+    eval(display.previousValue + ' / 100 *' + display.value) :
+    eval(display.previousValue + display.operator + display.value)
+
+    setDisplay({
+      ...display,
+      operator:'',
+      haspoint: false,
+      previousValue: '0',
+      value: result +'',
+  })
+
+    
+  }
+
    return(
     <div>
       <h1>Calculator</h1>
@@ -68,17 +125,23 @@ function App() {
             <td>
             <button
               className={specialButtonsClasses}
-              type='button'>{'<'}</button>
+              type='button'
+              onClick={deleteLastCharacter}>
+                {'<'}</button>
             </td>
             <td>
             <button
               className={operatorsButtonsClasses}
-              type='button'>%</button>
+              type='button'
+              onClick={() => setOperator('%')}
+              >%</button>
             </td>
             <td>
             <button
               className={operatorsButtonsClasses}
-              type='button'>/</button>
+              type='button'
+              onClick={() => setOperator('/')}
+              >/</button>
             </td>
           </tr>
           <tr>
@@ -107,7 +170,9 @@ function App() {
             <td>
             <button
               className={operatorsButtonsClasses}
-              type='button'>x</button>
+              type='button'
+              onClick={() => setOperator('*')}
+              >x</button>
             </td>
           </tr>
           <tr>
@@ -135,7 +200,9 @@ function App() {
             <td>
             <button
               className={operatorsButtonsClasses}
-              type='button'>-</button>
+              type='button'
+              onClick={() => setOperator('-')}
+              >-</button>
             </td>
           </tr>
           <tr>
@@ -163,7 +230,9 @@ function App() {
             <td>
             <button
               className={operatorsButtonsClasses}
-              type='button'>+</button>
+              type='button'
+              onClick={() => setOperator('+')}
+              >+</button>
             </td>
           </tr>
           <tr>
@@ -184,7 +253,9 @@ function App() {
             <td>
             <button
               className={specialButtonsClasses}
-              type='button'>=</button>
+              type='button'
+              onClick={calculate}
+              >=</button>
             </td>
           </tr>
         </tbody>
