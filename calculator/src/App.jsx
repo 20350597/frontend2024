@@ -5,6 +5,7 @@ const numericButtonsClasses = 'btn btn-outline-info w-100'
 const operatorsButtonsClasses = 'btn btn-outline-warning w-100'
 const specialButtonsClasses = 'btn btn-outline-danger w-100'
 
+
 function App() {
  const [display, setDisplay] = useState({
   value: '0',
@@ -106,7 +107,13 @@ function App() {
     return string.slice(0, length)
   }
     
- 
+ const buttonsFunctions = {
+  updateDisplay,
+  clearDisplay,
+  deleteLastCharacter,
+  setOperator,
+  calculate,
+ }
 
    return(
     <div>
