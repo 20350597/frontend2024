@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import { buttons } from './assets/buttons'
+import { ButtonsRow } from './components/ButtonsRow'
 
-const numericButtonsClasses = 'btn btn-outline-info w-100'
-const operatorsButtonsClasses = 'btn btn-outline-warning w-100'
-const specialButtonsClasses = 'btn btn-outline-danger w-100'
 
 
 function App() {
@@ -91,6 +90,8 @@ function App() {
 
     let result = (display.operator === '%') ? 
     eval(display.previousValue + ' / 100 *' + display.value) :
+    display.operator === 'x' ?
+    eval(display.previousValue + '*' + display.value) :
     eval(display.previousValue + display.operator + display.value)
 
     result = result + ""  
@@ -104,6 +105,7 @@ function App() {
   })
 }
   const limit = (string = ' ', length = 10) => {
+    string = string +''
     return string.slice(0, length)
   }
     
@@ -126,150 +128,17 @@ function App() {
               <h2>{display.value}</h2>
             </td>
           </tr>
-          <tr>
-            <td>
-            <button
-              className={specialButtonsClasses}
-              type='button'
-              onClick={clearDisplay}
-              >C</button>
-            </td>
-            <td>
-            <button
-              className={specialButtonsClasses}
-              type='button'
-              onClick={deleteLastCharacter}>
-                {'<'}</button>
-            </td>
-            <td>
-            <button
-              className={operatorsButtonsClasses}
-              type='button'
-              onClick={() => setOperator('%')}
-              >%</button>
-            </td>
-            <td>
-            <button
-              className={operatorsButtonsClasses}
-              type='button'
-              onClick={() => setOperator('/')}
-              >/</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-            <button
-              className = {numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('7')}
-              >7</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'  
-              onClick={() => updateDisplay('8')}
-        
-              >8</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('9')}
-              >9</button>
-            </td>
-            <td>
-            <button
-              className={operatorsButtonsClasses}
-              type='button'
-              onClick={() => setOperator('*')}
-              >x</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('4')}
-              >4</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('5')}
-              >5</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('6')}
-              >6</button>
-            </td>
-            <td>
-            <button
-              className={operatorsButtonsClasses}
-              type='button'
-              onClick={() => setOperator('-')}
-              >-</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('1')}
-              >1</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('2')}
-              >2</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('3')}
-              >3</button>
-            </td>
-            <td>
-            <button
-              className={operatorsButtonsClasses}
-              type='button'
-              onClick={() => setOperator('+')}
-              >+</button>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2}>
-              <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('0')}
-              >0</button>
-            </td>
-            <td>
-            <button
-              className={numericButtonsClasses}
-              type='button'
-              onClick={() => updateDisplay('.')}
-              >.</button>
-            </td>
-            <td>
-            <button
-              className={specialButtonsClasses}
-              type='button'
-              onClick={calculate}
-              >=</button>
-            </td>
-          </tr>
+          {
+          buttons.map((row, index) => {
+            return(
+              <ButtonsRow 
+              key={index}
+              row={row}
+              buttonsFunctions={buttonsFunctions}
+              />
+            )
+          })
+          }
         </tbody>
       </table>
     </div>
