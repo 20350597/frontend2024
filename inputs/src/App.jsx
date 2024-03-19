@@ -2,17 +2,28 @@ import { useState } from "react"
 
 
 function App() {
-  const [username, setUsername] = useState("")
+  const [inputsForm, setInputsForm] = useState({
+    username: "",
+    password: "",
 
-  const handleUsernameChange = (event) => {
-   setUsername(event.target.value)
-   // console.log(username)    
+  })
+
+  const handleInputChange = (event) => {
+   setInputsForm({
+    ...inputsForm, //spread operator
+    [event.target.name]: event.target.value,
+   })
   }
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(username)
-    setUsername("")
+    console.log("Nombre de usuario:", inputsForm.username)
+    console.log("Contraseña:", inputsForm.password)
+    setInputsForm({
+      username: "",
+      password: "",
+    })
 
   }
 
@@ -24,14 +35,23 @@ function App() {
     <div>
       <label htmlFor="username">Username</label>
       <input 
-      onChange={(event) => handleUsernameChange(event)} 
+      onChange={(event) => handleInputChange(event)} 
       id="username" 
       type="text"
-      value={username} />
+      name="username"
+      value={inputsForm.username} 
+      />
     </div>
     <div>
       <label htmlFor="password">Password</label>
-      <input id="password" type="password" />
+      <input 
+      id="password" 
+      type="password" 
+      name="password"
+      value = {inputsForm.password}
+      onChange={(event) => handleInputChange(event)} 
+
+      />
     </div>
     <button type="submit">Submit</button>
   </form>
