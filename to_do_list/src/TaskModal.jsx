@@ -1,4 +1,6 @@
 import { useForm } from "./Hooks/UseForm"
+import PropTypes from "prop-types"
+import Swal from "sweetalert2"
 const taskInfo ={
     task: "",
     description: "",
@@ -9,17 +11,26 @@ const TaskModal = ({taskList, setTaskList}) => {
     const [values, handleInputChange, reset]= useForm(taskInfo)
 
     const handleSaveClick = () => {
-        setTaskList([
+
+        const newTaskList = [
             ...taskList,
             {
                 id: taskList.length + 1,
                 ...values,
                 isDone: false
             }
-        ])
+        ]
 
-        localStorage.setItem("taskList", JSON.stringify(taskList))
+        setTaskList(newTaskList)
+
+        localStorage.setItem("taskList", JSON.stringify(newTaskList))
         reset()
+
+        Swal.fire({
+            icon: 'success',
+            tittle: 'Task added',
+        })
+    
     }
     return(
         <div className="modal fade" id={"TaskModal"}>
@@ -87,11 +98,12 @@ const TaskModal = ({taskList, setTaskList}) => {
                                          
                     </div>
                     <div className="modal-footer">
-                        
                     <button 
                         className="btn btn-sm btn-primary"
-                        onClick={handleSaveClick}>
-                            <i className="bi bi-pencil-square"></i>
+                        onClick={handleSaveClick}
+                        data-bs-dismiss="modal">
+
+                        <i className="bi bi-pencil-square"></i>
                             Save
                     </button>
                     <button
@@ -108,6 +120,11 @@ const TaskModal = ({taskList, setTaskList}) => {
         </div>
     )
    
+}
+
+TaskModal.propTypes = {
+    taskList: PropTypes.array.isRequired,
+    setTaskList: PropTypes.func.isRequired
 }
 
 export default TaskModal
