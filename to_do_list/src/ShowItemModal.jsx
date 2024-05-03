@@ -27,20 +27,24 @@ const ShowItemModal = ({task}) => {
                     </div>
                     <div className="modal-footer">
             <button className="btn btn-sm btn-outline-danger">
-              <i className="bi bi-trash"></i>
-            Delete
+                        <i className="bi bi-trash"></i>
+                         Delete
             </button>
-                        <button className="btn btn-sm btn-outline-primary">
-            <i className="bi bi-pencil-square"></i>
+            <button className="btn btn-sm btn-outline-primary"
+                        data-bs-target={"#TaskModal" + task.id}
+                        data-bs-toggle="modal"
+
+                    >
+                        <i className="bi bi-pencil-square"></i>
             Edit
             </button>
-                        <button type="button"
+            <button type="button"
                             className="btn btn-sm btn-outline-secondary"
                             data-bs-dismiss="modal"
                             > 
                             <i className="bi bi-x -lg"></i>
                              Close
-                        </button>
+            </button>
                     </div>
                 </div>
             </div>

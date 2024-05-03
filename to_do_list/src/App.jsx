@@ -16,6 +16,7 @@ function App() {
       <hr />
       <List 
       taskList={taskList}
+      setTaskList={setTaskList}
       />
 
 <hr />

@@ -1,7 +1,7 @@
 import Listittem from "./Listittem"
 import PropTypes from "prop-types"
 
-const List = ({taskList}) =>{
+const List = ({taskList, setTaskList}) =>{
     return(
         <>
         <div className="row">
@@ -16,9 +16,7 @@ const List = ({taskList}) =>{
         <div className="col-3">
           <h4>Location</h4>
         </div>
-        <div className="col">
-          <h4>Done</h4>
-        </div>
+
       </div>
 
       {
@@ -27,6 +25,8 @@ const List = ({taskList}) =>{
                 <Listittem
                 key={task.id}
                 task={task}
+                taskList={taskList}
+                setTaskList={setTaskList}
                 />
             )
         )
@@ -38,6 +38,7 @@ const List = ({taskList}) =>{
 }
 
 List.propTypes = {
-    taskList: PropTypes.array.isRequired
+    taskList: PropTypes.array.isRequired,
+    setTaskList: PropTypes.func.isRequired,
 }
 export default List

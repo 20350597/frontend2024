@@ -7,8 +7,8 @@ const taskInfo ={
     location: "",
     limit: ""
 }
-const TaskModal = ({taskList, setTaskList}) => {
-    const [values, handleInputChange, reset]= useForm(taskInfo)
+const TaskModal = ({task = null, taskList, setTaskList}) => {
+    const [values, handleInputChange, reset]= useForm(task || taskInfo)
 
     const handleSaveClick = () => {
 
@@ -32,15 +32,20 @@ const TaskModal = ({taskList, setTaskList}) => {
         })
     
     }
+
+    const id = task?.id || ''
+
     return(
-        <div className="modal fade" id={"TaskModal"}>
+        <div className="modal fade" id={"TaskModal" + id}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title"
                             id="taskModalLabel">
-                            Add new Task
                         </h5>
+                        {
+                            task ? "Edit Task" : "Add New Task"
+                        }
 
                     </div>
                     <div className="modal-body">
@@ -124,6 +129,7 @@ const TaskModal = ({taskList, setTaskList}) => {
 
 TaskModal.propTypes = {
     taskList: PropTypes.array.isRequired,
+    task: PropTypes.object,
     setTaskList: PropTypes.func.isRequired
 }
 
