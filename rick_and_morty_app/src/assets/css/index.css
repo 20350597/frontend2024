@@ -1,0 +1,29 @@
+body {
+  background-image: url('../wallpaper.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #ffffff; /* Asegúrate de que el texto sea legible sobre el fondo */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0); /* Fondo semitransparente para las tarjetas */
+  color: #ffffff;
+  animation: rotate 10s infinite linear;
+  width: 100%;
+  backdrop-filter: blur(60px);
+  display: flex;
+}
+
+.input-group input {
+  color: #ffffff; /* Texto negro en los campos de entrada */
+  background-color: #ffffff; /* Fondo blanco en los campos de entrada */
+
+}
+
+.alert-danger {
+  color: #000000; /* Texto blanco en alertas */
+  background-color: rgba(255, 0, 25, 0.9); /* Fondo semitransparente para alertas */
+}
+
+

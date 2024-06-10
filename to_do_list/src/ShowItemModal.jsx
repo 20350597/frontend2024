@@ -33,7 +33,6 @@ const ShowItemModal = ({task}) => {
             <button className="btn btn-sm btn-outline-primary"
                         data-bs-target={"#TaskModal" + task.id}
                         data-bs-toggle="modal"
-
                     >
                         <i className="bi bi-pencil-square"></i>
             Edit

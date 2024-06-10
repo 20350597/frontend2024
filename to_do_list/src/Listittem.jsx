@@ -9,7 +9,7 @@ import TaskModal from "./TaskModal"
               <ShowItemModal task={task} />
               <TaskModal 
                 task={task}
-                taskList={[taskList]}
+                taskList={taskList}
                 setTaskList={setTaskList}
               />
               <input type="checkbox" />

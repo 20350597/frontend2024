@@ -11,15 +11,33 @@ const TaskModal = ({task = null, taskList, setTaskList}) => {
     const [values, handleInputChange, reset]= useForm(task || taskInfo)
 
     const handleSaveClick = () => {
+        let newTaskList = []
 
-        const newTaskList = [
+        if (task) {
+            // console.log({taskList, values})
+            newTaskList = taskList.map((t) => {
+                if (t.id === task.id) {
+                    t.task = values.task
+                    t.description = values.description
+                    t.location = values.location
+                    t.limit = values.limit
+                } 
+                return t
+            })
+
+        } else {
+
+        newTaskList = [
             ...taskList,
             {
                 id: taskList.length + 1,
                 ...values,
                 isDone: false
             }
+        
         ]
+    }
+        // console.log({newTaskList})
 
         setTaskList(newTaskList)
 

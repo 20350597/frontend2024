@@ -13,13 +13,11 @@ const App = () => {
       <SearchCity cities={cities} setCities={setCities}/>
       <hr />
       <div className="row">
-        <div className="col">
           {
             cities.map((city, index) => (
               <WeatherCard key={index} city={city} />            
             ))
           }
-        </div>
       </div>
     </div>
   )
